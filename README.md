@@ -1,11 +1,11 @@
-<h1 align="center">markshust/docker-magento</h1>
+<h1 align="center">chuccv/docker-magento</h1>
 
 <div align="center">
   <p>Mark Shust's Docker Configuration for Magento</p>
   <img src="https://img.shields.io/badge/magento-2.X-brightgreen.svg?logo=magento&longCache=true" alt="Supported Magento Versions" />
   <a href="https://hub.docker.com/r/markoshust/magento-php/" target="_blank"><img src="https://img.shields.io/docker/pulls/markoshust/magento-php.svg?label=php%20docker%20pulls" alt="Docker Hub Pulls - PHP" /></a>
   <a href="https://hub.docker.com/r/markoshust/magento-nginx/" target="_blank"><img src="https://img.shields.io/docker/pulls/markoshust/magento-nginx.svg?label=nginx%20docker%20pulls" alt="Docker Hub Pulls - Nginx" /></a>
-  <a href="https://github.com/markshust/docker-magento/graphs/commit-activity" target="_blank"><img src="https://img.shields.io/badge/maintained%3F-yes-brightgreen.svg" alt="Maintained - Yes" /></a>
+  <a href="https://github.com/chuccv/docker-magento/graphs/commit-activity" target="_blank"><img src="https://img.shields.io/badge/maintained%3F-yes-brightgreen.svg" alt="Maintained - Yes" /></a>
   <img src="https://img.shields.io/badge/apple%20silicon%20support-yes-brightgreen" alt="Apple Silicon Support" />
   <a href="https://opensource.org/licenses/MIT" target="_blank"><img src="https://img.shields.io/badge/license-MIT-blue.svg" /></a>
 </div>
@@ -133,7 +133,7 @@ Folders:
 - `images`: Docker images for nginx and php
 - `compose`: sample setups with Docker Compose
 
-> The Magento 1 version of this development environment has been deprecated and is no longer supported. PHP 5 was used as it's base, and that version has reached end-of-life. If you still wish to use this setup, please reference [compose/magento-1 on tag 20.1.1](https://github.com/markshust/docker-magento/tree/20.1.1/compose/magento-1), but please be aware these images are no longer maintained.
+> The Magento 1 version of this development environment has been deprecated and is no longer supported. PHP 5 was used as it's base, and that version has reached end-of-life. If you still wish to use this setup, please reference [compose/magento-1 on tag 20.1.1](https://github.com/chuccv/docker-magento/tree/20.1.1/compose/magento-1), but please be aware these images are no longer maintained.
 
 ## Prerequisites
 
@@ -179,10 +179,10 @@ mkdir -p ~/Sites/magento
 cd $_
 
 # Download the Docker Compose template:
-curl -s https://raw.githubusercontent.com/markshust/docker-magento/master/lib/template | bash
+curl -s https://raw.githubusercontent.com/chuccv/docker-magento/master/lib/template | bash
 
 # Download the version of Magento you want to use with:
-bin/download community 2.4.7-p3
+bin/download community 2.4.8
 # You can specify the edition (community, enterprise, mageos) and version (2.4.7-p3, 1.0.5, etc.)
 # If no arguments are passed in, the edition defaults to "community"
 # If no version is specified, it defaults to the most recent version defined in `bin/download`
@@ -208,7 +208,7 @@ mkdir -p ~/Sites/magento
 cd $_
 
 # Download the Docker Compose template:
-curl -s https://raw.githubusercontent.com/markshust/docker-magento/master/lib/template | bash
+curl -s https://raw.githubusercontent.com/chuccv/docker-magento/master/lib/template | bash
 
 # Take a backup of your existing database:
 bin/mysqldump > ~/Sites/existing/magento.sql
@@ -244,8 +244,8 @@ open https://magento.test
 
 ### Elasticsearch vs OpenSearch
 OpenSearch is set as the default search engine when setting up this project. Follow the instructions below if you want to use Elasticsearch instead:
-1. Comment out or remove the `opensearch` container in both the [`compose.yaml`](https://github.com/markshust/docker-magento/blob/master/compose/compose.yaml#L69-L84) and [`compose.healthcheck.yaml`](https://github.com/markshust/docker-magento/blob/master/compose/compose.healthcheck.yaml#L36-L41) files
-2. Uncomment the `elasticsearch` container in both the [`compose.yaml`](https://github.com/markshust/docker-magento/blob/master/compose/compose.yaml#L86-L106) and [`compose.healthcheck.yaml`](https://github.com/markshust/docker-magento/blob/master/compose/compose.healthcheck.yaml#L43-L48) files
+1. Comment out or remove the `opensearch` container in both the [`compose.yaml`](https://github.com/chuccv/docker-magento/blob/master/compose/compose.yaml#L69-L84) and [`compose.healthcheck.yaml`](https://github.com/chuccv/docker-magento/blob/master/compose/compose.healthcheck.yaml#L36-L41) files
+2. Uncomment the `elasticsearch` container in both the [`compose.yaml`](https://github.com/chuccv/docker-magento/blob/master/compose/compose.yaml#L86-L106) and [`compose.healthcheck.yaml`](https://github.com/chuccv/docker-magento/blob/master/compose/compose.healthcheck.yaml#L43-L48) files
 3. Update the `bin/setup-install` command to use the Elasticsearch rather than OpenSearch. Change:
 
 ```
@@ -382,7 +382,7 @@ After successfully installing the Magento environment, you can access the backen
 3. Upon logging in, you might be prompted to configure Two-Factor Authentication (2FA). This emails you a code to log in with (which you can check with Mailcatcher by visiting `http://{yourdomain}:1080`). By default, the email address used for this purpose is:
 - **Email:** `john.smith@gmail.com`
 
-If you are testing in a local development environment and wish to disable 2FA, you can do so by installing [Mark's DisableTwoFactorAuth module](https://github.com/markshust/magento2-module-disabletwofactorauth).
+If you are testing in a local development environment and wish to disable 2FA, you can do so by installing [Mark's DisableTwoFactorAuth module](https://github.com/chuccv/magento2-module-disabletwofactorauth).
 
 ### Caching
 
@@ -466,13 +466,13 @@ These credentials can be used to log in to PhpMyAdmin:
 
 Install and enable the PHP Debug extension from the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-debug).
 
-Otherwise, this project now automatically sets up Xdebug support with VS Code. If you wish to set this up manually, please see the [`.vscode/launch.json`](https://github.com/markshust/docker-magento/blame/master/compose/.vscode/launch.json) file.
+Otherwise, this project now automatically sets up Xdebug support with VS Code. If you wish to set this up manually, please see the [`.vscode/launch.json`](https://github.com/chuccv/docker-magento/blame/master/compose/.vscode/launch.json) file.
 
 ### Xdebug & VS Code in a WSL2 environment
 
 Install and enable the PHP Debug extension from the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-debug).
 
-Otherwise, this project now automatically sets up Xdebug support with VS Code. If you wish to set this up manually, please see the [`.vscode/launch.json`](https://github.com/markshust/docker-magento/blame/master/compose/.vscode/launch.json) file.
+Otherwise, this project now automatically sets up Xdebug support with VS Code. If you wish to set this up manually, please see the [`.vscode/launch.json`](https://github.com/chuccv/docker-magento/blame/master/compose/.vscode/launch.json) file.
 
 1. In VS Code, make sure that it's running in a WSL window, rather than in the default window.
 2. Install the [`PHP Debug`](https://marketplace.visualstudio.com/items?itemName=xdebug.php-debug) extension on VS Code.
@@ -772,7 +772,7 @@ Additional information of how to work with SPX is available at https://www.youtu
 
 ## Known Issues
 
-There are currently no large known issues or workarounds needed to use docker-magento with your Magento project. If you find any, please [report them](https://github.com/markshust/docker-magento/issues)!
+There are currently no large known issues or workarounds needed to use docker-magento with your Magento project. If you find any, please [report them](https://github.com/chuccv/docker-magento/issues)!
 
 ## Credits
 
@@ -788,9 +788,9 @@ My name is Mark Shust and I'm the creator of this repo. I'm a <a href="https://w
 
 - <a href="https://m.academy/courses" target="_blank">🖥️ See my Magento lessons & courses</a>
 - <a href="https://m.academy/articles" target="_blank">📖 Read my technical articles</a>
-- <a href="https://youtube.com/markshust" target="_blank">🎥 Watch my YouTube videos</a>
-- <a href="https://www.linkedin.com/in/MarkShust/" target="_blank">🔗 Connect on LinkedIn</a>
-- <a href="https://twitter.com/MarkShust" target="_blank">🐦 Follow me on X</a>
+- <a href="https://youtube.com/chuccv" target="_blank">🎥 Watch my YouTube videos</a>
+- <a href="https://www.linkedin.com/in/chuccv/" target="_blank">🔗 Connect on LinkedIn</a>
+- <a href="https://twitter.com/chuccv" target="_blank">🐦 Follow me on X</a>
 - <a href="mailto:mark@m.academy">💌 Contact me</a>
 
 ## License
