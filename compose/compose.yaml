@@ -20,7 +20,7 @@ services:
       - ~/.composer:/var/www/.composer:cached
       - ~/.ssh/id_rsa:/var/www/.ssh/id_rsa:cached
       - ~/.ssh/known_hosts:/var/www/.ssh/known_hosts:cached
-      - ./src:/var/www/html
+      - ./:/var/www/html
       - sockdata:/sock
       - ssldata:/etc/nginx/certs
     networks:
@@ -39,7 +39,7 @@ services:
       - app_network
     #extra_hosts: *appextrahosts
     environment:
-        - PHP_IDE_CONFIG=serverName=docker
+      - PHP_IDE_CONFIG=serverName=docker
 
   db:
     image: mariadb:10.6
@@ -89,7 +89,7 @@ services:
       - "cluster.routing.allocation.disk.threshold_enabled=false"
       - "index.blocks.read_only_allow_delete"
       ## Uncomment to set custom heap size to avoid memory errors
-      #- "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g"
+      - "OPENSEARCH_JAVA_OPTS=-Xms200m -Xmx200m"
       ## Uncomment to increase the virtual memory map count
       #- "max_map_count=262144"
     networks:
@@ -168,3 +168,6 @@ volumes:
 networks:
   app_network:
     driver: bridge
+    ipam:
+      config:
+       - gateway: 172.17.0.1
