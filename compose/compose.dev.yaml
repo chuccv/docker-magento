@@ -9,6 +9,7 @@ services:
       - ./package.json.sample:/var/www/html/package.json:cached
       - ./generated:/var/www/html/generated:cached
       - ./var:/var/www/html/var:cached
+      - ./src/bin:/var/www/html/bin:cached
       - ./env/xdebug.ini:/usr/local/etc/php/conf.d/custom.ini
       #- ./auth.json:/var/www/html/auth.json:cached
       #- ./m2-hotfixes:/var/www/html/m2-hotfixes:cached
