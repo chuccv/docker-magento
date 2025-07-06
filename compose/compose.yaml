@@ -168,7 +168,7 @@ volumes:
 networks:
   app_network:
     driver: bridge
-    ipam:
-      config:
-        - subnet: 172.17.0.0/16 #change this if you changed the default Docker network
-          gateway: 172.17.0.1
+#    ipam:
+#      config:
+#        - subnet: 172.17.0.0/16 #change this if you changed the default Docker network
+#          gateway: 172.17.0.1
