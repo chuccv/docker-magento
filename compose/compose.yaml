@@ -32,7 +32,7 @@ services:
       #- "host.docker.internal:host-gateway"
 
   phpfpm:
-    image: markoshust/magento-php:8.3-fpm-4
+    image: markoshust/magento-php:8.4-fpm
     volumes: *appvolumes
     env_file: env/phpfpm.env
     networks:
@@ -42,7 +42,7 @@ services:
       - PHP_IDE_CONFIG=serverName=docker
 
   db:
-    image: mariadb:10.6
+    image: mariadb:11.4
     command:
       --max_allowed_packet=64M
       --optimizer_use_condition_selectivity=1
@@ -89,7 +89,7 @@ services:
       - "cluster.routing.allocation.disk.threshold_enabled=false"
       - "index.blocks.read_only_allow_delete"
       ## Uncomment to set custom heap size to avoid memory errors
-      - "OPENSEARCH_JAVA_OPTS=-Xms200m -Xmx200m"
+      - "OPENSEARCH_JAVA_OPTS=-Xms200m -Xmx600m"
       ## Uncomment to increase the virtual memory map count
       #- "max_map_count=262144"
     networks:
@@ -168,7 +168,3 @@ volumes:
 networks:
   app_network:
     driver: bridge
-    ipam:
-      config:
-        - subnet: 172.17.0.0/16 #change this if you changed the default Docker network
-          gateway: 172.17.0.1
