@@ -28,8 +28,8 @@ services:
       #extra_hosts: &appextrahosts
       ## Selenium support, replace "magento.test" with URL of your site
       #- "magento.test:172.17.0.1"
-      ## Linux, uncomment for Xdebug capabilities:
-      #- "host.docker.internal:host-gateway"
+      # Linux, uncomment for Xdebug capabilities:
+      - "host.docker.internal:host-gateway"
 
   phpfpm:
     image: markoshust/magento-php:8.4-fpm
@@ -42,7 +42,7 @@ services:
       - PHP_IDE_CONFIG=serverName=docker
 
   db:
-    image: mariadb:11.4
+    image: mariadb:10.6
     ports:
       - "3306:3306"
     env_file: env/db.env
@@ -68,8 +68,11 @@ services:
 
   redis:
     image: redis:7.2-alpine
+    command: redis-server --maxmemory 450m --maxmemory-policy allkeys-lru --maxmemory-samples 3 --save 900 1 --save 300 10 --save 60 10000 --rdbcompression yes --tcp-backlog 511 --timeout 0 --tcp-keepalive 60 --hash-max-ziplist-entries 512 --hash-max-ziplist-value 64 --list-max-ziplist-size -2 --set-max-intset-entries 512 --zset-max-ziplist-entries 128 --zset-max-ziplist-value 64
     ports:
       - "6379:6379"
+    volumes:
+      - redisdata:/data
     networks:
       - app_network
 
@@ -91,6 +94,8 @@ services:
       #- "max_map_count=262144"
     networks:
       - app_network
+    volumes:
+      - op_data:/usr/share/opensearch/data
 
   ## If you wish to use Elasticsearch, comment out opensearch image above and
   ## uncomment this block. Do the same in the composer.healthcheck.yaml file.
@@ -158,14 +163,12 @@ services:
 volumes:
   dbdata:
   rabbitmqdata:
+  redisdata:
   sockdata:
   ssldata:
+  op_data:
 
 
 networks:
   app_network:
     driver: bridge
-#    ipam:
-#      config:
-#        - subnet: 172.17.0.0/16 #change this if you changed the default Docker network
-#          gateway: 172.17.0.1
