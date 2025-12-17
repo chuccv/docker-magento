@@ -1,0 +1,4 @@
+#!/bin/bash
+
+SSH_KEY_PATH="~/.ssh/{key_path}/id_rsa"
+GIT_SSH_COMMAND="ssh -i $SSH_KEY_PATH -o IdentitiesOnly=yes" git "$@"
