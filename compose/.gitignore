@@ -76,6 +76,8 @@ atlassian*
 
 /bin/*
 !/bin/magento
+!/bin/README.md
+!/bin/README_VN.md
 /env/
 .cursorignore
 *.yaml
