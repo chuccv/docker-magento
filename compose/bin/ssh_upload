@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+sshpass -p 'your_pass' rsync -av --progress --partial \
+  -e "ssh -T -c aes128-gcm@openssh.com -o Compression=no -o IPQoS=throughput" \
+  /var/www/html/evelant/gsp_data_11_12.sql.gz \
+  dev-user@46.246.38.92:/var/www/vhosts/alpha.g-sp.se/webroot/
