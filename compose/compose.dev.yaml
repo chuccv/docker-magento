@@ -2,6 +2,7 @@ services:
   app:
     volumes: &appvolumes
       ## Host mounts with performance penalty, only put what is necessary here
+#      - add ./src/... if use src/
       - ./grunt-config.json.sample:/var/www/html/grunt-config.json:cached
       - ./Gruntfile.js.sample:/var/www/html/Gruntfile.js:cached
       - ./dev/tools/grunt/configs:/var/www/html/dev/tools/grunt/configs:cached
@@ -18,12 +19,12 @@ services:
   phpfpm:
     volumes: *appvolumes
 
-#  phpmyadmin:
-#    image: linuxserver/phpmyadmin
-#    env_file: env/db.env
-#    ports:
-#      - "8080:80"
-#    depends_on:
-#      - db
-#    networks:
-#      - app_network
+  phpmyadmin:
+    image: linuxserver/phpmyadmin
+    env_file: env/db.env
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    networks:
+      - app_network

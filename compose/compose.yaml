@@ -20,6 +20,7 @@ services:
       - ~/.composer:/var/www/.composer:cached
       - ~/.ssh/id_rsa:/var/www/.ssh/id_rsa:cached
       - ~/.ssh/known_hosts:/var/www/.ssh/known_hosts:cached
+    #  - add ./src/... if use src/
       - ./:/var/www/html
       - sockdata:/sock
       - ssldata:/etc/nginx/certs
@@ -120,6 +121,12 @@ services:
   #    #- "max_map_count=262144"
   #    ## Uncomment the line below if ElasticSearch fails to start and stops after ~150 seconds with the error "container for service "elasticsearch" is unhealthy".
   #    #- "xpack.security.enabled=false"
+  #  volumes:
+  #    - es_data:/usr/share/elasticsearch/data
+  #  networks:
+  #    - app_network
+  
+  #   for magento ^248 neeed run composer require elasticsearch/elasticsearch ^8.0
 
   rabbitmq:
     image: markoshust/magento-rabbitmq:3.13-0
@@ -167,6 +174,7 @@ volumes:
   sockdata:
   ssldata:
   op_data:
+  es_data:
 
 
 networks:
